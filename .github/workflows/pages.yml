@@ -2,7 +2,7 @@ name: Build and Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main ]     # 如果你的默认分支不是 main，请改掉
+    branches: [ master ]        # 你的默认分支是 master
   workflow_dispatch:
 
 permissions:
@@ -33,14 +33,12 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Build
-        run: yarn build
+        run: yarn build          # 该项目构建后输出到 dist/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist
-
-
+          path: ./dist           # 构建产物目录
 
   deploy:
     needs: build
